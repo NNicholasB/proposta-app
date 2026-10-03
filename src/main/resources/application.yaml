@@ -1,3 +1,13 @@
 spring:
   application:
     name: proposta-app
+  datasource:
+    url: jdbc:postgresql://localhost:5432/propostadb
+    password: 123
+    username: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
