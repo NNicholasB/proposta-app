@@ -5,10 +5,10 @@ import com.study.proposta_app.DTO.PropostaResponseDTO;
 import com.study.proposta_app.service.PropostaService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -19,7 +19,24 @@ public class PropostaController {
 
     @PostMapping
     public ResponseEntity<PropostaResponseDTO> criar(@RequestBody PropostaRequestDTO requestDTO){
-        PropostaResponseDTO response = service.cria(requestDTO);
-        return ResponseEntity.ok(response);
+        PropostaResponseDTO response = service.criar(requestDTO);
+        return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest()
+                        .path("/id")
+                        .buildAndExpand(response.getId())
+                        .toUri()).body(response);
     }
+
+    @GetMapping
+    public ResponseEntity<List<PropostaResponseDTO>> obter(){
+
+        return ResponseEntity.ok(service.obterProposta());
+    }
+
+
+
+
+
+
+
+
 }
