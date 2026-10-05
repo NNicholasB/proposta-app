@@ -2,12 +2,17 @@ package com.study.proposta_app.mapper;
 
 
 import com.study.proposta_app.DTO.PropostaRequestDTO;
+import com.study.proposta_app.DTO.PropostaResponseDTO;
 import com.study.proposta_app.entity.Proposta;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.springframework.http.ResponseEntity;
 
-@Mapper
+import java.util.List;
+
+@Mapper(componentModel = "spring")
 public interface PropostaMapper {
+
 
     @Mapping(target= "usuario.nome", source="nome")
     @Mapping(target= "usuario.sobrenome", source="sobrenome")
@@ -18,5 +23,15 @@ public interface PropostaMapper {
     @Mapping(target= "aprovada", ignore = true)
     @Mapping(target= "integrada", ignore = true)
     @Mapping(target= "observacao", ignore = true)
+
     Proposta toProposta(PropostaRequestDTO propostaRequestDTO);
+
+    @Mapping(target = "nome",source = "usuario.nome")
+    @Mapping(target = "sobrenome",source = "usuario.sobrenome")
+    @Mapping(target = "telefone",source = "usuario.telefone")
+    @Mapping(target = "cpf",source = "usuario.cpf")
+    @Mapping(target = "renda",source = "usuario.renda")
+    PropostaResponseDTO convertEntityToDto(Proposta proposta);
+
+    List<PropostaResponseDTO> converteListEntityToListDTO(Iterable<Proposta> propostas);
 }
