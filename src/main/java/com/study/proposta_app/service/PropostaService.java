@@ -22,10 +22,14 @@ public class PropostaService {
     @Autowired
     private final PropostaMapper propostaMapper;
 
+    private NotificacaoService notificacaoService;
+
     public PropostaResponseDTO criar(PropostaRequestDTO requestDTO){
         Proposta proposta = propostaMapper.toProposta(requestDTO);
         propostaRepository.save(proposta);
-        return propostaMapper.convertEntityToDto(proposta);
+        PropostaResponseDTO response = propostaMapper.convertEntityToDto(proposta);
+        notificacaoService.notificar(response,"proposta-pendente.ex");
+        return response;
     }
 
     public List<PropostaResponseDTO> obterProposta() {
