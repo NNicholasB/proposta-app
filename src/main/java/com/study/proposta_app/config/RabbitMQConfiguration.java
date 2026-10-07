@@ -4,6 +4,9 @@ package com.study.proposta_app.config;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.converter.JacksonJsonMessageConverter;
+import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
@@ -58,4 +61,16 @@ public class RabbitMQConfiguration {
         return BindingBuilder.bind(criarFilaPropostaPendenteMsNotificacao()).to(criarFanoutExchangePropostaPendente());
     }
 
+    @Bean
+    public MessageConverter jacksonJsonMessageConverter(){
+        return new JacksonJsonMessageConverter();
+    }
+
+    @Bean
+    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory){
+        RabbitTemplate rabbitTemplate= new RabbitTemplate();
+        rabbitTemplate.setConnectionFactory(connectionFactory);
+        rabbitTemplate.setMessageConverter(jacksonJsonMessageConverter());
+        return rabbitTemplate;
+    }
 }
