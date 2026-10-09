@@ -1,7 +1,6 @@
 package com.study.proposta_app.service;
 
 
-import com.study.proposta_app.DTO.PropostaResponseDTO;
 import com.study.proposta_app.entity.Proposta;
 import lombok.AllArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
 @Service
-public class NotificacaoService {
+public class NotificacaoRabbitService {
 
     private RabbitTemplate rabbitTemplate;
 
