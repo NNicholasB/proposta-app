@@ -4,18 +4,22 @@ import com.study.proposta_app.DTO.PropostaRequestDTO;
 import com.study.proposta_app.DTO.PropostaResponseDTO;
 import com.study.proposta_app.service.PropostaService;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/proposta")
 public class PropostaController {
 
-    private PropostaService service;
+
+    private final PropostaService service;
+
 
     @PostMapping
     public ResponseEntity<PropostaResponseDTO> criar(@RequestBody PropostaRequestDTO requestDTO){
