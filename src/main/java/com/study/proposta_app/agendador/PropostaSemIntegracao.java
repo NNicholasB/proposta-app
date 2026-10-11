@@ -22,7 +22,7 @@ public class PropostaSemIntegracao {
     private final NotificacaoRabbitService notificacaoRabbitService;
 
     @Value("${rabbitmq.propostapendente.exchange}")
-    private final String exchange;
+    private String exchange;
 
     private final Logger logger= LoggerFactory.getLogger(PropostaSemIntegracao.class);
 
