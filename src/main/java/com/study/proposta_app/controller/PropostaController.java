@@ -3,9 +3,8 @@ package com.study.proposta_app.controller;
 import com.study.proposta_app.DTO.PropostaRequestDTO;
 import com.study.proposta_app.DTO.PropostaResponseDTO;
 import com.study.proposta_app.service.PropostaService;
-import lombok.AllArgsConstructor;
+
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
