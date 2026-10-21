@@ -24,12 +24,17 @@ public class PropostaConcluidaListener {
     @Autowired
     private PropostaMapper mapper;
 
-    @Transactional
+
     @RabbitListener(queues = "${rabbitmq.queue.proposta.concluida}")
     public void propostaConcluida(Proposta proposta) {
-         propostaRepository.save(proposta);
+        atualizarProposta(proposta);
         PropostaResponseDTO responseDTO= mapper.convertEntityToDto(proposta);
         webSocketService.notificar(responseDTO);
 
     }
+
+    private void atualizarProposta(Proposta proposta){
+        propostaRepository.atualizarProposta(proposta.getId(),proposta.getAprovada(),proposta.getObservacao());
+    }
+
 }
