@@ -19,3 +19,4 @@ rabbitmq:
   queue:
     proposta:
       concluida: proposta-concluida.ms-proposta
+      pendente: proposta-pendente.ms-analise-credito
