@@ -2,15 +2,21 @@ spring:
   application:
     name: proposta-app
   datasource:
-    url: jdbc:postgresql://localhost:5432/propostadb
+    url: jdbc:postgresql://host.docker.internal:5432/propostadb
     password: 123
     username: postgres
+  rabbitmq:
+    host: host.docker.internal
+    port: 5672
+    username: guest
+    password: guest
   jpa:
     hibernate:
       ddl-auto: create-drop
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+
 rabbitmq:
   propostapendente:
     exchange: proposta-pendente.ex
